@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { useTRPC } from "@/trpc/client"
 import { useMutation } from "@tanstack/react-query"
+import { useState } from "react"
 import { toast } from "sonner"
 
 const page = () => {
@@ -12,11 +13,13 @@ const page = () => {
       toast.success("Background Job started")
     }
   }))
+  const [value, setvalue] = useState('')
   return (
     <div className="p-4 max-w-7xl mx-auto">
-      <Button disabled={invoke.isPending} onClick={()=> invoke.mutate({text:"aryanpatel24242"})}>Invoke Background Job</Button>
+      <Button disabled={invoke.isPending} onClick={()=> invoke.mutate({value:value})}>Invoke Background Job</Button>
+      <input type="text" value={value} onChange={((e)=>setvalue(e.target.value))} className="border border-gray-300 rounded-md p-2"/>
     </div>
   )
 }
 
-export default page
+export default page  
